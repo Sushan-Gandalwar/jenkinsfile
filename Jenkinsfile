@@ -2,14 +2,6 @@ pipeline {
     agent any
 
     stages {
-        stage('Checkout') {
-            steps {
-               
-                checkout scmGit(branches: [[name: '*/main']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/Sushan-Gandalwar/react-alarm-app.git']])
-                sh 'echo "Building the project"'
-            }
-        }
-
         stage('build image') {
             steps {
                 script {
