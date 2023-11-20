@@ -1,11 +1,14 @@
 pipeline {
     agent any
 
+    parameters {
+        string(name: 'GIT_URL', description: 'GitHub Repository URL')
+    }
+
     stages {
         stage('Checkout') {
             steps {
-               
-                checkout scmGit(branches: [[name: '*/main']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/Sushan-Gandalwar/react-alarm-app.git']])
+                checkout scmGit(branches: [[name: '*/main']], extensions: [], userRemoteConfigs: [[url: params.GIT_URL]])
                 sh 'echo "Building the project"'
             }
         }
@@ -17,14 +20,13 @@ pipeline {
                 }
             }
         }
-        stage('access image locally'){
-            steps{
-                script{
+
+        stage('access image locally') {
+            steps {
+                script {
                     sh 'docker run -p 8085:3000 jaydeep'
                 }
             }
         }
-
     }
 }
-
