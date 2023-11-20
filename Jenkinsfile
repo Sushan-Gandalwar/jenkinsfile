@@ -4,7 +4,7 @@ pipeline {
     agent any
 
     parameters {
-        string(name: 'GIT_URL', description: 'GitHub Repository URL')
+        string(name: 'GIT_URL', description: 'GitHub Repository URL By Sushant')
     }
 
     stages {
