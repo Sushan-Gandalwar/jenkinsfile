@@ -1,4 +1,4 @@
-// shared-library/vars/commonFunctions.groovy
+// shared-library-repo/vars/commonFunctions.groovy
 
 def callCheckout(def stages, def gitUrl) {
     stages.stage('Checkout') {
@@ -9,21 +9,21 @@ def callCheckout(def stages, def gitUrl) {
     }
 }
 
-def buildImage(def stages) {
-    stages.stage('build image') {
+def buildImage(def stages, def imageName) {
+    stages.stage('Build image') {
         steps {
             script {
-                sh 'docker build -t jaydeep .'
+                sh "docker build -t ${imageName} ."
             }
         }
     }
 }
 
-def accessImageLocally(def stages) {
-    stages.stage('access image locally') {
+def accessImageLocally(def stages, def port, def imageName) {
+    stages.stage('Access image locally') {
         steps {
             script {
-                sh 'docker run -p 8085:3000 jaydeep'
+                sh "docker run -p ${port}:3000 ${imageName}"
             }
         }
     }
